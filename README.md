@@ -1,6 +1,6 @@
 # Smart Backward Kill Word Widget
 
-!(demo)[https://raw.githubusercontent.com/seletskiy/zsh-smart-kill-word/master/smart-kill-word.gif]
+![demo](https://raw.githubusercontent.com/seletskiy/zsh-smart-kill-word/master/smart-kill-word.gif)
 
 # Installation
 
