@@ -2,7 +2,9 @@ autoload -U match-words-by-style
 
 function smart-backward-kill-word() {
     local precise
+    local keep_slash
     zstyle -g precise ':zle:smart-kill-word' precise
+    zstyle -g keep_slash ':zle:smart-kill-word' keep-slash
 
     local from_cursor_to_left=(${(z)LBUFFER})
 
@@ -30,11 +32,30 @@ function smart-backward-kill-word() {
             ;;
 
         shell)
-            match-words-by-style -w shell-subword -r '/'
+            -smart-kill-word-match-slash-aware ${keep_slash:+true}
             ;;
     esac
 
     LBUFFER=${matched_words[1]}
+}
+
+function -smart-kill-word-match-slash-aware() {
+    local keep_slash=${1:-false}
+
+    match-words-by-style -w shell-subword
+    if [ "${matched_words[2]}" = "/" ]; then
+        return
+    fi
+
+    if $keep_slash && [ "${BUFFER[$CURSOR]}" = "/" ]; then
+        BUFFER[$CURSOR]=""
+    fi
+
+    match-words-by-style -w shell-subword -r '/'
+
+    if $keep_slash && [ "${matched_words[2]:0:1}" = "/" ]; then
+        matched_words[1]=${matched_words[1]}"/"
+    fi
 }
 
 zle -N smart-backward-kill-word
