@@ -18,3 +18,13 @@ zgen load seletskiy/zsh-smart-kill-word
 bindkey '^W' smart-kill-word
 bindkey '^S' smart-kill-word
 ```
+
+# Settings
+
+Following settings are unset by default:
+
+`zstyle ':zle:smart-kill-word' precise`:
+* `always` &mdash; behave same inside quotes as outside of them;
+
+`zstyle ':zle:smart-kill-word' keep-slash`:
+* `on` &mdash; keep slash after erasing word inside path;
