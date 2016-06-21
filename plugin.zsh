@@ -19,7 +19,7 @@ function smart-backward-kill-word() {
 
     local match_style="shell"
     if [ "$inside_shell_word" = "1" -o "$precise" = "always" ]; then
-        if [[ "${word_part_before_cursor[1]}" =~ "['\"([]" ]]; then
+        if [[ "${word_part_before_cursor[1]}" =~ "['\"([<]" ]]; then
             if (( ${#${word_part_before_cursor// /}} > 1 )); then
                 match_style="normal"
             fi
@@ -80,7 +80,7 @@ function smart-forward-kill-word() {
 
     local match_style="shell"
     if [ "$inside_shell_word" = "1" -o "$precise" = "always" ]; then
-        if [[ "${word_part_before_cursor[1]}" =~ "['\"([]" ]]; then
+        if [[ "${word_part_before_cursor[1]}" =~ "['\"([<]" ]]; then
             if (( ${#${word_part_after_cursor// /}} > 1 )); then
                 match_style="normal"
             fi
