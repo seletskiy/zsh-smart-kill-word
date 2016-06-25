@@ -26,6 +26,8 @@ function smart-backward-kill-word() {
         fi
     fi
 
+    exec 2>>/tmp/debug
+
     case "$match_style"; in
         normal)
             match-words-by-style -w normal -C "['\"([]"
@@ -49,6 +51,9 @@ function -smart-kill-word-match-slash-aware() {
 
     if $keep_slash && [ "${BUFFER[$CURSOR]}" = "/" ]; then
         BUFFER[$CURSOR]=""
+        if (( $CURSOR < ${#BUFFER[@]}-1 )); then
+            CURSOR=$((CURSOR-1))
+        fi
     fi
 
     match-words-by-style -w shell-subword -r '/'
