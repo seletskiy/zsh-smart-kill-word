@@ -26,8 +26,6 @@ function smart-backward-kill-word() {
         fi
     fi
 
-    exec 2>>/tmp/debug
-
     case "$match_style"; in
         normal)
             match-words-by-style -w normal -C "['\"([]"
