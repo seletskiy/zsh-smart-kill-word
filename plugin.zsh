@@ -54,7 +54,7 @@ function -smart-kill-word-match-slash-aware() {
         fi
     fi
 
-    match-words-by-style -w shell-subword -r '/'
+    match-words-by-style -w whitespace-subword -r '/'
 
     if $keep_slash && [ "${matched_words[2]:0:1}" = "/" ]; then
         matched_words[1]=${matched_words[1]}"/"
